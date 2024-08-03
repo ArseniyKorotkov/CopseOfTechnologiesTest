@@ -35,8 +35,7 @@ public class FloatingCircleTransition {
 
         transition = new TranslateTransition();
         transition.setInterpolator(Interpolator.LINEAR);
-        transition.setByX(angleAnalyzer.getX());
-        transition.setByY(angleAnalyzer.getY());
+       transitionSetDirectionXY();
         transition.setNode(circle);
         transition.setDuration(Duration.seconds(DURATION));
         transition.setCycleCount(0);
@@ -62,8 +61,7 @@ public class FloatingCircleTransition {
     private void addClickListener(Circle circle) {
         circle.setOnMouseClicked(mouseEvent -> {
             angleAnalyzer = new AngleAnalyzer(Math.random() * 360, speedPixelOnSecond, DURATION);
-            transition.setByX(angleAnalyzer.getX());
-            transition.setByY(angleAnalyzer.getY());
+            transitionSetDirectionXY();
             updateDirection();
         });
     }
@@ -81,8 +79,7 @@ public class FloatingCircleTransition {
         checkCollisionDownWall();
 
         if (angleAnalyzer != null) {
-            transition.setByX(angleAnalyzer.getX());
-            transition.setByY(angleAnalyzer.getY());
+            transitionSetDirectionXY();
         }
 
         resume();
@@ -115,6 +112,11 @@ public class FloatingCircleTransition {
             updateUpDownDirection();
             isRightCircleDirection = false;
         }
+    }
+
+    private void transitionSetDirectionXY() {
+        transition.setByX(angleAnalyzer.getX());
+        transition.setByY(angleAnalyzer.getY());
     }
 
 
