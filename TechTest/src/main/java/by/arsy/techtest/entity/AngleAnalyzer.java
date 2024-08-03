@@ -1,4 +1,4 @@
-package by.arsy.techtest;
+package by.arsy.techtest.entity;
 
 
 public class AngleAnalyzer {

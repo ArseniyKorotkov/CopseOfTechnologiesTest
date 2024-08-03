@@ -1,4 +1,4 @@
-package by.arsy.techtest;
+package by.arsy.techtest.entity;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -21,6 +21,7 @@ public class FloatingCircleTransition {
     private boolean isRightCircleDirection;
     private boolean isUpCircleDirection;
 
+
     public FloatingCircleTransition(Circle circle, double animationPlaceWidth, double animationPlaceHeight) {
         this.circle = circle;
         this.animationPlaceHeight = animationPlaceHeight;
@@ -28,9 +29,9 @@ public class FloatingCircleTransition {
     }
 
 
-    public void play(double speedPixelOnSecond, double angle) {
+    public void play(double speedPixelOnSecond, double startAngle) {
         this.speedPixelOnSecond = speedPixelOnSecond;
-        angleAnalyzer = new AngleAnalyzer(angle, speedPixelOnSecond, DURATION);
+        angleAnalyzer = new AngleAnalyzer(startAngle, speedPixelOnSecond, DURATION);
 
         transition = new TranslateTransition();
         transition.setInterpolator(Interpolator.LINEAR);
@@ -47,10 +48,16 @@ public class FloatingCircleTransition {
         updateDirection();
     }
 
-    private void updateDirection() {
-        updateUpDownDirection();
-        updateRightLeftDirection();
+
+    public void stop() {
+        transition.stop();
     }
+
+
+    public void resume() {
+        transition.play();
+    }
+
 
     private void handlingWallCollision() {
 
@@ -66,49 +73,75 @@ public class FloatingCircleTransition {
             transition.setByY(angleAnalyzer.getY());
         }
 
-        transition.play();
+        resume();
     }
 
+
+    private void updateDirection() {
+
+        updateUpDownDirection();
+        updateRightLeftDirection();
+
+    }
+
+
     private void checkCollisionRightWall() {
+
         if (circle.getTranslateX() > animationPlaceWidth - circle.getRadius() && isRightCircleDirection) {
+
             double randomRight = (Math.random() + 1) * HALF_CIRCLE;
+
             angleAnalyzer = new AngleAnalyzer(randomRight, speedPixelOnSecond, DURATION);
             updateUpDownDirection();
             isRightCircleDirection = false;
         }
     }
 
+
     private void checkCollisionLeftWall() {
+
         if (circle.getTranslateX() < circle.getRadius() && !isRightCircleDirection) {
+
             double randomLeft = Math.random() * HALF_CIRCLE;
+
             angleAnalyzer = new AngleAnalyzer(randomLeft, speedPixelOnSecond, DURATION);
             updateUpDownDirection();
             isRightCircleDirection = true;
         }
     }
 
+
     private void checkCollisionUpWall() {
+
         if (circle.getTranslateY() < circle.getRadius() && isUpCircleDirection) {
+
             double randomUp = Math.random() * HALF_CIRCLE + QUARTER_CIRCLE;
+
             angleAnalyzer = new AngleAnalyzer(randomUp, speedPixelOnSecond, DURATION);
             updateRightLeftDirection();
             isUpCircleDirection = false;
         }
     }
 
+
     private void checkCollisionDownWall() {
+
         if (circle.getTranslateY() > animationPlaceHeight - circle.getRadius() && !isUpCircleDirection) {
+
             double randomDown = Math.random() * HALF_CIRCLE;
             randomDown = randomDown > QUARTER_CIRCLE ? randomDown + HALF_CIRCLE : randomDown;
+
             angleAnalyzer = new AngleAnalyzer(randomDown, speedPixelOnSecond, DURATION);
             updateRightLeftDirection();
             isUpCircleDirection = true;
         }
     }
 
+
     private void updateUpDownDirection() {
         isUpCircleDirection = angleAnalyzer.getY() < 0;
     }
+
 
     private void updateRightLeftDirection() {
         isRightCircleDirection = angleAnalyzer.getX() > 0;

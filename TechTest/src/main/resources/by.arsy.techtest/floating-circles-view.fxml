@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="by.arsy.techtest.controller.FloatingCirclesController">
+
+    <center>
+        <Pane fx:id="circleField"/>
+    </center>
+
+    <bottom>
+        <HBox>
+
+            <TextField fx:id="circleSize"
+                       promptText="size circle"/>
+
+            <TextField fx:id="circleSpeed"
+                       promptText="speed circle"/>
+
+            <TextField fx:id="circleStartAngle"
+                       promptText="size circle"/>
+
+
+            <Button fx:id="playButton"
+                    text="play"
+                    onAction="#playFloating"/>
+
+            <Button fx:id="pauseButton"
+                    onAction="#pause"
+                    text="pause"/>
+
+
+            <Text fx:id="exceptionText"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
