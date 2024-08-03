@@ -13,6 +13,8 @@ Program make circle on center animation field and pull it in any direction
 Size, speed and direction will be written by the user, then click "play" button.
 User will have a circle for every click.
 <br/>
+Click mouse on circle to change direction
+<br/>
 Press "pause" to stop the circles from moving. 
 Buttons will change name to "resume" (continue moving) and "terminate"(clear all)
 <br/>

@@ -123,14 +123,14 @@ public class FloatingCirclesController {
 
 
     private CircleDto takeInput() {
-        double radius = -1;
-        double speed = -1;
-        double angle = -1;
+        double radius = 0;
+        double speed = 0;
+        double angle = 0;
         try {
             radius = Double.parseDouble(circleSize.getText());
             speed = Double.parseDouble(circleSpeed.getText());
             angle = Double.parseDouble(circleStartAngle.getText());
-            if (radius < 0 || speed < 0 || angle < 0) {
+            if (radius <= 0 || speed <= 0 || angle <= 0) {
                 throw new RuntimeException(EXCEPTION_INPUT_MESSAGE);
             }
         } catch (RuntimeException e) {
