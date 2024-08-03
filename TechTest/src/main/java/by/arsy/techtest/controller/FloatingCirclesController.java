@@ -3,12 +3,12 @@ package by.arsy.techtest.controller;
 
 import by.arsy.techtest.dto.CircleDto;
 import by.arsy.techtest.entity.FloatingCircleTransition;
+import by.arsy.techtest.entity.SmartCircle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -66,16 +66,16 @@ public class FloatingCirclesController {
 
         CircleDto circleDto = takeInput();
 
-        Circle circle = createCircle(
-                screenWidth / 2,
-                screenHeight / 2,
+        SmartCircle circle = createCircle(
+                screenWidth,
+                screenHeight,
                 circleDto.getRadius(),
                 FILL_COLORS[(int) (Math.random() * FILL_COLORS.length)],
                 STROKE_COLORS[(int) (Math.random() * STROKE_COLORS.length)]);
 
         if (areAllValuesCorrect) {
             circleField.getChildren().add(circle);
-            FloatingCircleTransition circleTransition = new FloatingCircleTransition(circle, screenWidth, screenHeight);
+            FloatingCircleTransition circleTransition = new FloatingCircleTransition(circle);
             circleTransition.play(circleDto.getSpeed(), circleDto.getAngle());
             CIRCLE_TRANSITIONS.add(circleTransition);
         }
@@ -143,14 +143,19 @@ public class FloatingCirclesController {
     }
 
 
-    private Circle createCircle(double centerX, double centerY, double radius, Color colorFill, Color colorStroke) {
+    private SmartCircle createCircle(double animationPlaceWidth,
+                                     double animationPlaceHeight,
+                                     double radius,
+                                     Color colorFill,
+                                     Color colorStroke) {
 
         checkCircleRadiusToScreenSize(radius);
-
+        double centerX = animationPlaceWidth / 2;
+        double centerY = animationPlaceHeight / 2;
         centerX = fixCenterXCircleInScreen(centerX, radius);
         centerY = fixCenterYCircleInScreen(centerY, radius);
 
-        Circle circle = new Circle();
+        SmartCircle circle = new SmartCircle(animationPlaceHeight, animationPlaceWidth);
         circle.setTranslateX(centerX);
         circle.setTranslateY(centerY);
         circle.setRadius(radius);

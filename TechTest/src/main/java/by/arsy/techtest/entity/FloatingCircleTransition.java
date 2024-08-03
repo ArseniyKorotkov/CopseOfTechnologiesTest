@@ -2,7 +2,6 @@ package by.arsy.techtest.entity;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class FloatingCircleTransition {
@@ -11,10 +10,10 @@ public class FloatingCircleTransition {
     private static final int QUARTER_CIRCLE = 90;
     private static final int HALF_CIRCLE = 180;
 
-    private final Circle circle;
-    private final double animationPlaceWidth;
-    private final double animationPlaceHeight;
+    private final SmartCircle circle;
 
+    private double animationPlaceWidth;
+    private double animationPlaceHeight;
     private TranslateTransition transition;
     private AngleAnalyzer angleAnalyzer;
     private double speedPixelOnSecond;
@@ -22,10 +21,9 @@ public class FloatingCircleTransition {
     private boolean isUpCircleDirection;
 
 
-    public FloatingCircleTransition(Circle circle, double animationPlaceWidth, double animationPlaceHeight) {
+    public FloatingCircleTransition(SmartCircle circle) {
         this.circle = circle;
-        this.animationPlaceHeight = animationPlaceHeight;
-        this.animationPlaceWidth = animationPlaceWidth;
+        updateAnimationPlaceSize();
     }
 
 
@@ -63,6 +61,8 @@ public class FloatingCircleTransition {
 
         angleAnalyzer = null;
 
+        updateAnimationPlaceSize();
+
         checkCollisionRightWall();
         checkCollisionLeftWall();
         checkCollisionUpWall();
@@ -74,6 +74,14 @@ public class FloatingCircleTransition {
         }
 
         resume();
+    }
+
+
+    private void updateAnimationPlaceSize() {
+
+        animationPlaceHeight = circle.getAnimationPlaceHeight();
+        animationPlaceWidth = circle.getAnimationPlaceWidth();
+
     }
 
 

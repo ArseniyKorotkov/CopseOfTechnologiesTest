@@ -13,29 +13,34 @@
     </center>
 
     <bottom>
-        <HBox>
+        <BorderPane>
+            <bottom>
+                <HBox>
 
-            <TextField fx:id="circleSize"
-                       promptText="size circle"/>
+                    <TextField fx:id="circleSize"
+                               promptText="size circle"/>
 
-            <TextField fx:id="circleSpeed"
-                       promptText="speed circle"/>
+                    <TextField fx:id="circleSpeed"
+                               promptText="speed circle"/>
 
-            <TextField fx:id="circleStartAngle"
-                       promptText="size circle"/>
-
-
-            <Button fx:id="playButton"
-                    text="play"
-                    onAction="#playFloating"/>
-
-            <Button fx:id="pauseButton"
-                    onAction="#pause"
-                    text="pause"/>
+                    <TextField fx:id="circleStartAngle"
+                               promptText="size circle"/>
 
 
-            <Text fx:id="exceptionText"/>
-        </HBox>
+                    <Button fx:id="playButton"
+                            text="play"
+                            onAction="#playFloating"/>
+
+                    <Button fx:id="pauseButton"
+                            onAction="#pause"
+                            text="pause"/>
+
+
+                    <Text fx:id="exceptionText"/>
+
+                </HBox>
+            </bottom>
+        </BorderPane>
     </bottom>
 
 </BorderPane>
