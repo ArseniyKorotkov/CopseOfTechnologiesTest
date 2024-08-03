@@ -24,7 +24,7 @@
                                promptText="speed circle"/>
 
                     <TextField fx:id="circleStartAngle"
-                               promptText="size circle"/>
+                               promptText="duration circle"/>
 
 
                     <Button fx:id="playButton"

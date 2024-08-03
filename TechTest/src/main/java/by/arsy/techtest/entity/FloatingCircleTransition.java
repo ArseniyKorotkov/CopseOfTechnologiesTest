@@ -2,6 +2,7 @@ package by.arsy.techtest.entity;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class FloatingCircleTransition {
@@ -23,6 +24,7 @@ public class FloatingCircleTransition {
 
     public FloatingCircleTransition(SmartCircle circle) {
         this.circle = circle;
+        addClickListener(circle);
         updateAnimationPlaceSize();
     }
 
@@ -54,6 +56,16 @@ public class FloatingCircleTransition {
 
     public void resume() {
         transition.play();
+    }
+
+
+    private void addClickListener(Circle circle) {
+        circle.setOnMouseClicked(mouseEvent -> {
+            angleAnalyzer = new AngleAnalyzer(Math.random() * 360, speedPixelOnSecond, DURATION);
+            transition.setByX(angleAnalyzer.getX());
+            transition.setByY(angleAnalyzer.getY());
+            updateDirection();
+        });
     }
 
 
